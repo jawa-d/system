@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:system/models.dart';
 
 class EmployeeDetails extends StatelessWidget {
+  
   final Employee employee;
   final Function onDelete; // دالة الحذف
   final Function onEdit; // دالة التعديل
@@ -15,10 +16,14 @@ class EmployeeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      
       appBar: AppBar(
+        
         title: Text('Employee Details'),
         actions: [
+          
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () {
@@ -37,24 +42,43 @@ class EmployeeDetails extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Name: ${employee.name}',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            side: BorderSide(color: Colors.blueAccent, width: 2.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  leading: Icon(Icons.person, size: 40),
+                  title: Text(
+                    'Name: ${employee.name}',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.work, size: 40),
+                  title: Text(
+                    'Position: ${employee.position}',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.email, size: 40),
+                  title: Text(
+                    'Email: ${employee.email}',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
-            Text(
-              'Position: ${employee.position}',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Email: ${employee.email}',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
+          ),
         ),
       ),
     );
