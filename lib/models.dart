@@ -8,6 +8,16 @@ class Employee {
     required this.name,
     required this.position,
     required this.email,
-    this.imageUrl,
+    this.imageUrl, required String phoneNumber, required String department, required String address, DateTime? joiningDate, required String attendanceStatus,
   });
+
+  get phoneNumber => null;
+
+  get department => null;
+
+  get address => null;
+
+  DateTime? get joiningDate => null;
+
+  get attendanceStatus => null;
 }
