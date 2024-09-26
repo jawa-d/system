@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:system/models.dart';
 
@@ -20,15 +19,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   
   File? _selectedImage; // الصورة المختارة
 
-  Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _selectedImage = File(pickedImage.path); // تخزين الصورة
-      });
-    }
-  }
-
+ 
   // لفتح واجهة اختيار التاريخ
   Future<void> _selectJoiningDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -120,20 +111,7 @@ class _AddEmployeeState extends State<AddEmployee> {
               SizedBox(height: 20),
 
               // اختيار صورة الموظف
-              GestureDetector(
-                onTap: _pickImage, // فتح معرض الصور
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blueAccent, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: _selectedImage != null
-                      ? Image.file(_selectedImage!, fit: BoxFit.cover)
-                      : Center(child: Text('Select Image')),
-                ),
-              ),
+           
               
               SizedBox(height: 20),
               

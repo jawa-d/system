@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:system/models.dart';
 
 class EmployeeDetails extends StatelessWidget {
-  
   final Employee employee;
   final Function onDelete; // دالة الحذف
   final Function onEdit; // دالة التعديل
@@ -16,27 +15,17 @@ class EmployeeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      
       appBar: AppBar(
-        
-        title: Text('Employee Details'),
+        title: Text('تفاصيل الموظف'),
         actions: [
-          
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {
-              // استدعاء دالة التعديل
-              onEdit(employee);
-            },
+            onPressed: () => onEdit(employee), // استدعاء دالة التعديل
           ),
           IconButton(
             icon: Icon(Icons.delete),
-            onPressed: () {
-              // تأكيد الحذف
-              _showDeleteConfirmationDialog(context);
-            },
+            onPressed: () => _showDeleteConfirmationDialog(context),
           ),
         ],
       ),
@@ -53,33 +42,31 @@ class EmployeeDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ListTile(
-                  leading: Icon(Icons.person, size: 40),
-                  title: Text(
-                    'Name: ${employee.name}',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                _buildEmployeeDetailRow(Icons.person, 'الاسم: ${employee.name}', 24, FontWeight.bold),
                 Divider(),
-                ListTile(
-                  leading: Icon(Icons.work, size: 40),
-                  title: Text(
-                    'Position: ${employee.position}',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
+                _buildEmployeeDetailRow(Icons.work, 'المسمى الوظيفي: ${employee.position}', 20, FontWeight.normal),
                 Divider(),
-                ListTile(
-                  leading: Icon(Icons.email, size: 40),
-                  title: Text(
-                    'Email: ${employee.email}',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
+                _buildEmployeeDetailRow(Icons.email, 'البريد الإلكتروني: ${employee.email}', 20, FontWeight.normal),
+                Divider(),
+                _buildEmployeeDetailRow(Icons.phone, 'رقم الهاتف: ${employee.phoneNumber}', 20, FontWeight.normal),
+                Divider(),
+                _buildEmployeeDetailRow(Icons.business, 'القسم: ${employee.department}', 20, FontWeight.normal),
+                Divider(),
+                _buildEmployeeDetailRow(Icons.location_on, 'العنوان: ${employee.address}', 20, FontWeight.normal),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildEmployeeDetailRow(IconData icon, String title, double fontSize, FontWeight fontWeight) {
+    return ListTile(
+      leading: Icon(icon, size: 40, color: Colors.blueAccent),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
       ),
     );
   }
@@ -89,14 +76,12 @@ class EmployeeDetails extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Employee'),
-          content: Text('Are you sure you want to delete this employee?'),
+          title: Text('حذف الموظف'),
+          content: Text('هل أنت متأكد أنك تريد حذف هذا الموظف؟'),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // إغلاق الحوار
-              },
-              child: Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(), // إغلاق الحوار
+              child: Text('إلغاء'),
             ),
             TextButton(
               onPressed: () {
@@ -104,7 +89,7 @@ class EmployeeDetails extends StatelessWidget {
                 Navigator.of(context).pop(); // إغلاق الحوار
                 Navigator.of(context).pop(); // العودة إلى قائمة الموظفين
               },
-              child: Text('Delete'),
+              child: Text('حذف'),
             ),
           ],
         );

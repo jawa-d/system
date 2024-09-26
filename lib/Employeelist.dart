@@ -4,7 +4,7 @@ import 'package:system/models.dart';
 
 class EmployeeList extends StatelessWidget {
   final List<Employee> employees;
-  final Function onDelete;
+  final Function onDelete; // تأكد من أن هذه الدالة تمرر بشكل صحيح
   final Function onEdit;
 
   EmployeeList({
@@ -18,10 +18,10 @@ class EmployeeList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Employee List'),
+        title: Text('قائمة الموظفين'),
       ),
       body: employees.isEmpty
-          ? Center(child: Text('No employees added yet.'))
+          ? Center(child: Text('لا يوجد موظفين مضافين بعد.'))
           : ListView.builder(
               itemCount: employees.length,
               itemBuilder: (context, index) {
@@ -55,9 +55,9 @@ class EmployeeList extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 5),
-                        Text('Position: ${employee.position}'),
+                        Text('المسمى الوظيفي: ${employee.position}'),
                         SizedBox(height: 5),
-                        Text('Email: ${employee.email}'),
+                        Text('البريد الإلكتروني: ${employee.email}'),
                       ],
                     ),
                     trailing: Row(
@@ -72,7 +72,7 @@ class EmployeeList extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
-                            onDelete(employee);
+                            onDelete(employee); // استدعاء دالة الحذف
                           },
                         ),
                       ],
@@ -81,8 +81,11 @@ class EmployeeList extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              EmployeeDetails(employee: employee, onDelete: onDelete, onEdit: onEdit),
+                          builder: (context) => EmployeeDetails(
+                            employee: employee,
+                            onDelete: onDelete,
+                            onEdit: onEdit,
+                          ),
                         ),
                       );
                     },

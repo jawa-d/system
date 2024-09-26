@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:system/Dash.dart';
+import 'package:system/Dashboard.dart';
 
 
 void main() {
